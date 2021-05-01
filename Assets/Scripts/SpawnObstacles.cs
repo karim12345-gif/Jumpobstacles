@@ -8,12 +8,16 @@ public class SpawnObstacles : MonoBehaviour
     private Vector3 spawnPos = new Vector3(20, 0, 0); // obstacel postion 20 left of the x-axis 
     private float starDelay = 1.0f;
     private float timeRepate = 2;
+    private controlles controllescript;
 
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("spwanObstacles", starDelay,timeRepate); // will spawn objects on a timer  
-        
+
+        controllescript = GameObject.Find("Player").GetComponent<controlles>();
+
+
     }
 
     // Update is called once per frame
@@ -23,6 +27,10 @@ public class SpawnObstacles : MonoBehaviour
     }
     void spwanObstacles()
     {
-        Instantiate(obstaclesPrefab, spawnPos, obstaclesPrefab.transform.rotation); // will create clones of the object prefab obnstacles prefab
+        if(controllescript.gameOver == false)
+        {
+            Instantiate(obstaclesPrefab, spawnPos, obstaclesPrefab.transform.rotation); // will create clones of the object prefab obnstacles prefab
+        }
     }
+        
 }

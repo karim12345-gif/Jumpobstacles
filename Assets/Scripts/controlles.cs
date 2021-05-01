@@ -7,7 +7,9 @@ public class controlles : MonoBehaviour
     private Rigidbody playerRib;
     public float jumpForce = 10;
     public float gravityModifer; // this will be modifed from the outside depending on the players mass 
-    public bool isOnGround = true; 
+    public bool isOnGround = true;
+    public bool gameOver = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,14 @@ public class controlles : MonoBehaviour
     private void OnCollisionEnter(Collision collision) // when ever the player enters collison with the groun , becuas it has its own collider 
         // now we can set our isOnGround to True 
     {
-        isOnGround = true;// if u go to the inspector for the player , u will see isonground box checked , thats beacuse its with collsion with
-        // the ground that has a collider 
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isOnGround = true; // if there was a collsion with the gameobjet and ground  , which is in this case player , then its true 
+        }
+        else if (collision.gameObject.CompareTag("Obstacels"))
+        {
+            gameOver = true;
+            Debug.Log("Game over");
+        }
     }
 }
